@@ -1,4 +1,30 @@
 <?php
+require_once __DIR__ . "/vendor/autoload.php";
+	use  josegonzalez\Dotenv\Loader as Dotenv;
+
+	$appDir = __DIR__;
+	Dotenv::load([
+	'filepath' =>  $appDir . '/.env',
+	'toEnv' => true
+	]);
+	$mysqlUser = $_ENV['MYSQL_USER'];
+	$mysqlPass = $_ENV['MYSQL_PASS'];
+	$mysqlHost = $_ENV['MYSQL_HOST'];
+	$mysqlDbName =  $_ENV['MYSQL_DBNAME'];
+
+	// $mysqlDsnFormat = "mysql:host=%s;dbname=%s;charset=UTF8";
+	// $dsn =  sprintf($mysqlDsnFormat, $mysqlHost, $mysqlDbName);
+
+	// $dbh = new PDO($dsn, $mysqlUser, $mysqlPass);
+	// $sql = 'SELECT * from users';
+
+	// $result = $dbh->query($sql);
+	// foreach ($result as $row) {
+	// echo $row['id'];
+	// }
+
+	// $dbh = null;
+
 // 変数の初期化
 $name = "";
 $room = "";
