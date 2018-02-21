@@ -30,73 +30,75 @@
 			</div>
 			<div class="row box">
 				<div id="ja-form" class="col-md-6 col-md-offset-3">
-					<form>
+					<form action="action.php" method="post">
+						<input type="hidden" name="lang" value="ja">
 						<div class="form-group">
 							<label for="name">名前</label>
-							<input type="text" class="form-control" id="name" placeholder="名前">
+							<input type="text" class="form-control" name="name" placeholder="名前">
 							<small class="form-text text-muted">入居者の名前を記入してください</small>
 						</div>
 						<div class="form-group">
 							<label for="room">部屋番号</label>
-							<input type="text" class="form-control" id="room" placeholder="部屋番号">
+							<input type="text" class="form-control" name="room" placeholder="部屋番号">
 						</div>
 						<div class="form-group">
 							<div class="radio">
-								<label class="checkbox-inline"><input type="radio" name="radio" id="visit" value="visit" checked> 訪問</label>
-								<label class="checkbox-inline"><input type="radio" name="radio" id="stay" value="stay"> 宿泊</label>
+								<label class="checkbox-inline"><input type="radio" name="visitType" value="1" checked> 訪問</label>
+								<label class="checkbox-inline"><input type="radio" name="visitType" value="2"> 宿泊</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="number" class="control-label">人数</label>
-							<select class="form-control" id="number" name="number">
+							<select class="form-control" name="number" name="number">
 								<option value="1" selected="selected">1人</option>
 								<option value="2">2人</option>
 								<option value="3">3人以上</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="datepicker">日付</label>
-							<input type="text" class="form-control" id="datepicker" value="<?php echo date('m/d/Y'); ?>">
+							<label for="date">日付</label>
+							<input type="text" class="form-control" name="date" id="datepicker" value="<?php echo date('m/d/Y'); ?>">
 						</div>
 						<div class="form-group">
 							<label for="time">時間</label>
-							<input type="text" class="form-control" id="time" value="<?php echo date('H:i'); ?>">
+							<input type="text" class="form-control" name="time" value="<?php echo date('H:i'); ?>">
 						</div>
 						<button type="submit" class="btn btn-primary">送信</button>
 					</form>
 				</div>
 				<div id="en-form" class="col-md-6 col-md-offset-3 hide">
-					<form>
+					<form action="action.php" method="post">
+						<input type="hidden" name="lang" value="en">
 						<div class="form-group">
 							<label for="name">Name</label>
-							<input type="text" class="form-control" id="name" placeholder="Tom">
-							<small class="form-text text-muted">Please write your name.</small>
+							<input type="text" class="form-control" name="name" placeholder="Tom">
+							<small class="form-text text-muted">Please write your name who live in this share house.</small>
 						</div>
 						<div class="form-group">
 							<label for="room">Room number</label>
-							<input type="text" class="form-control" id="room" placeholder="123">
+							<input type="text" class="form-control" name="room" placeholder="123">
 						</div>
 						<div class="form-group">
 							<div class="radio">
-								<label class="checkbox-inline"><input type="radio" name="radio" id="visit" value="visit" checked> Visit</label>
-								<label class="checkbox-inline"><input type="radio" name="radio" id="stay" value="stay"> Stay</label>
+								<label class="checkbox-inline"><input type="radio" name="visitType" value="1" checked> Visit</label>
+								<label class="checkbox-inline"><input type="radio" name="visitType" value="2"> Stay</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="number" class="control-label">Number</label>
-							<select class="form-control" id="number" name="number">
+							<select class="form-control" name="number" name="number">
 								<option value="1" selected="selected">1 person</option>
 								<option value="2">2 people</option>
 								<option value="3">3 people or more</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="datepicker2">Date</label>
-							<input type="text" class="form-control" id="datepicker2" value="<?php echo date('m/d/Y'); ?>">
+							<label for="date">Date</label>
+							<input type="text" class="form-control" name="date" id="datepicker2" value="<?php echo date('m/d/Y'); ?>">
 						</div>
 						<div class="form-group">
 							<label for="time">Time</label>
-							<input type="text" class="form-control" id="time" value="<?php echo date('H:i'); ?>">
+							<input type="text" class="form-control" name="time" value="<?php echo date('H:i'); ?>">
 						</div>
 						<button type="submit" class="btn btn-primary">Send</button>
 					</form>
