@@ -94,6 +94,18 @@ require_once __DIR__ . "/vendor/autoload.php";
 
 			if ($flag) {
 				print('<div class="alert alert-success" role="alert">' . $messages[0] . '</div>');
+				mb_language("Japanese");
+				mb_internal_encoding("UTF-8");
+				$to = $_ENV['MAIL_TO'];
+				$subject = 'ビジター申請がありました';
+				$message = '本文';
+				$from  = "From: ". $_ENV['MAIL_FROM'] . "\r\n";
+				$from .= "Return-Path: " . $_ENV['MAIL_FROM'];
+				if(mb_send_mail($to, $subject, $message, $from)){
+					echo "メールを送信しました";
+				} else {
+					echo "メールの送信に失敗しました";
+				}
 		    }else{
 				print('<div class="alert alert-danger" role="alert">' . $messages[1] . '</div>');
 		    }
