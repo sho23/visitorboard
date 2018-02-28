@@ -58,11 +58,11 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="date">日付</label>
+							<label for="date">訪問日</label>
 							<input type="text" class="form-control" name="date" id="datepicker" value="<?php echo date('m/d/Y'); ?>">
 						</div>
 						<div class="form-group">
-							<label for="time">時間</label>
+							<label for="time">訪問時間</label>
 							<input type="text" class="form-control" name="time" value="<?php echo date('H:i'); ?>">
 						</div>
 						<button type="submit" class="btn btn-primary">送信</button>
