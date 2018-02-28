@@ -1,3 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<title>ビジターボード</title>
+	<style>
+		.hide {
+			display: none;
+		}
+		.btn-toolbar {
+			margin-bottom: 15px;
+		}
+	</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div id="wrap">
+		<?php if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["lang"] == "en") { ?>
+			<div class="jumbotron text-center">
+				<h1>Visitor Board</h1>
+				<p>This is the borad for visitor</p>
+			</div>
+		<?php } else { ?>
+			<div class="jumbotron text-center">
+				<h1>ビジターボード</h1>
+				<p>ゲスト管理用のビジターボードです</p>
+			</div>
+		<?php } ?>
+		<div class="container">
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
 	use  josegonzalez\Dotenv\Loader as Dotenv;
@@ -9,6 +40,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 	]);
 
 	$homeUrl = $_ENV['HOME_URL'];
+	$messages = ['登録が完了しました。', 'データの追加に失敗しました', 'TOPページから情報を入力してください。', 'TOPへ'];
 
 	// mysqlの情報を取得
 	$mysqlUser = $_ENV['MYSQL_USER'];
@@ -37,29 +69,47 @@ require_once __DIR__ . "/vendor/autoload.php";
 		$lang = $_POST["lang"];
 		$created = date('Y-m-d H:i:s');
 		$houseId = $_ENV['HOUSE_ID'];
-		// DBに接続
-		$dsn =  sprintf($mysqlDsnFormat, $mysqlHost, $mysqlDbName);
-		$dbh = new PDO($dsn, $mysqlUser, $mysqlPass);
-		try {
-			$dbh = new PDO($dsn, $mysqlUser, $mysqlPass);
-		} catch (PDOException $e) {
-			exit('データベース接続失敗。'.$e->getMessage());
-		}
 
-		// INSERT
-		$sql = 'INSERT INTO visitors (house_id, name, room, visitType, number, date, time, lang, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-		$stmt = $dbh->prepare($sql);
-		$flag = $stmt->execute(array($houseId, $name, $room, $visitType, $number, $date, $time, $lang, $created));
-		if ($flag) {
-			print('データの追加に成功しました<br>');
-	    }else{
-			print('データの追加に失敗しました<br>');
-	    }
-		echo "<a href=" . $homeUrl . ">TOPへ</a>";
-		$dbh = null;
+		if (empty($name) || empty($room)) {
+			$er_msg = $lang == 'ja' ? '名前と部屋番号は必須です。' : 'Name and Room number are required.';
+			print('<div class="alert alert-danger" role="alert">'. $er_msg .'</div>');
+		} else {
+			// DBに接続
+			$dsn =  sprintf($mysqlDsnFormat, $mysqlHost, $mysqlDbName);
+			$dbh = new PDO($dsn, $mysqlUser, $mysqlPass);
+			try {
+				$dbh = new PDO($dsn, $mysqlUser, $mysqlPass);
+			} catch (PDOException $e) {
+				exit('データベース接続失敗。'.$e->getMessage());
+			}
+
+			// INSERT
+			$sql = 'INSERT INTO visitors (house_id, name, room, visitType, number, date, time, lang, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+			$stmt = $dbh->prepare($sql);
+			$flag = $stmt->execute(array($houseId, $name, $room, $visitType, $number, $date, $time, $lang, $created));
+
+
+			if ($lang == "en") {
+				$messages = ['Registration successful.', 'Failed to insert data. Please try again.', 'Register from top page.', 'Back to Top'];
+			}
+
+			if ($flag) {
+				print('<div class="alert alert-success" role="alert">' . $messages[0] . '</div>');
+		    }else{
+				print('<div class="alert alert-danger" role="alert">' . $messages[1] . '</div>');
+		    }
+			$dbh = null;
+		}
 	} else {
-		echo "フォームページからアクセスしてください。";
-		echo "<a href=" . $homeUrl . ">TOPへ</a>";
-		exit(1);
+		echo '<div class="alert alert-warning" role="alert">' . $messages[2] . '</div>';
 	}
 ?>
+			<div class="panel panel-default links">
+				<div class="panel-body text-center">
+					<a class="btn btn-default" href='<?php echo $homeUrl; ?>'><?php echo $messages[3]; ?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

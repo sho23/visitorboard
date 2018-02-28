@@ -34,12 +34,12 @@
 						<input type="hidden" name="lang" value="ja">
 						<div class="form-group">
 							<label for="name">名前</label>
-							<input type="text" class="form-control" name="name" placeholder="名前">
+							<input type="text" class="form-control" name="name" placeholder="名前" required>
 							<small class="form-text text-muted">入居者の名前を記入してください</small>
 						</div>
 						<div class="form-group">
 							<label for="room">部屋番号</label>
-							<input type="text" class="form-control" name="room" placeholder="部屋番号">
+							<input type="text" class="form-control" name="room" placeholder="部屋番号" required>
 						</div>
 						<div class="form-group">
 							<div class="radio">
@@ -71,12 +71,12 @@
 						<input type="hidden" name="lang" value="en">
 						<div class="form-group">
 							<label for="name">Name</label>
-							<input type="text" class="form-control" name="name" placeholder="Tom">
+							<input type="text" class="form-control" name="name" placeholder="Tom" required>
 							<small class="form-text text-muted">Please write your name who live in this share house.</small>
 						</div>
 						<div class="form-group">
 							<label for="room">Room number</label>
-							<input type="text" class="form-control" name="room" placeholder="123">
+							<input type="text" class="form-control" name="room" placeholder="123" required>
 						</div>
 						<div class="form-group">
 							<div class="radio">
