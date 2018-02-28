@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+	<?php $house_id = empty($_GET['house_id']) ? 999 : intval($_GET['house_id']); ?>
 	<div id="wrap">
 		<div class="jumbotron text-center">
 			<h1>ビジターボード</h1>
@@ -32,6 +33,7 @@
 				<div id="ja-form" class="col-md-6 col-md-offset-3">
 					<form action="action.php" method="post">
 						<input type="hidden" name="lang" value="ja">
+						<input type="hidden" name="house_id" value="<?php echo $house_id; ?>">
 						<div class="form-group">
 							<label for="name">名前</label>
 							<input type="text" class="form-control" name="name" placeholder="名前" required>
@@ -69,6 +71,7 @@
 				<div id="en-form" class="col-md-6 col-md-offset-3 hide">
 					<form action="action.php" method="post">
 						<input type="hidden" name="lang" value="en">
+						<input type="hidden" name="house_id" value="<?php echo $house_id; ?>">
 						<div class="form-group">
 							<label for="name">Name</label>
 							<input type="text" class="form-control" name="name" placeholder="Tom" required>

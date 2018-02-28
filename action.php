@@ -68,7 +68,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 		$time = htmlspecialchars($_POST["time"], ENT_QUOTES);
 		$lang = $_POST["lang"];
 		$created = date('Y-m-d H:i:s');
-		$houseId = $_ENV['HOUSE_ID'];
+		$houseId = intval($_POST["house_id"]);
 
 		if (empty($name) || empty($room)) {
 			$er_msg = $lang == 'ja' ? '名前と部屋番号は必須です。' : 'Name and Room number are required.';
@@ -88,7 +88,6 @@ require_once __DIR__ . "/vendor/autoload.php";
 			$stmt = $dbh->prepare($sql);
 			$flag = $stmt->execute(array($houseId, $name, $room, $visitType, $number, $date, $time, $lang, $created));
 
-
 			if ($lang == "en") {
 				$messages = ['Registration successful.', 'Failed to insert data. Please try again.', 'Register from top page.', 'Back to Top'];
 			}
@@ -106,7 +105,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 ?>
 			<div class="panel panel-default links">
 				<div class="panel-body text-center">
-					<a class="btn btn-default" href='<?php echo $homeUrl; ?>'><?php echo $messages[3]; ?></a>
+					<a class="btn btn-default" href='<?php echo $homeUrl . '?house_id=' . $houseId; ?>'><?php echo $messages[3]; ?></a>
 				</div>
 			</div>
 		</div>
