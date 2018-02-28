@@ -94,11 +94,13 @@ require_once __DIR__ . "/vendor/autoload.php";
 
 			if ($flag) {
 				print('<div class="alert alert-success" role="alert">' . $messages[0] . '</div>');
+				$numberList = [1 => '1人', 2 => '2人', 3 => '3人以上'];
+				$visitTypeList = [1 => '訪問', 2 => '宿泊'];
 				mb_language("Japanese");
 				mb_internal_encoding("UTF-8");
 				$to = $_ENV['MAIL_TO'];
 				$subject = 'ビジター申請がありました';
-				$message = "ビジター申請がありました。<br>内容は以下の通りです。\n\n\n■名前: ". $name ."\n■部屋番号: ". $room ."\n■訪問/宿泊: ". $visitType ."\n■人数: ". $number ."\n■日時: ". $date . $time;
+				$message = "ビジター申請がありました。\n内容は以下の通りです。\n\n\n■名前: ". $name ."\n■部屋番号: ". $room ."\n■訪問/宿泊: ". $visitTypeList[$visitType] ."\n■人数: ". $numberList[$number] ."\n■日時: ". $date . $time;
 				$from  = "From: ". $_ENV['MAIL_FROM'] . "\r\n";
 				$from .= "Return-Path: " . $_ENV['MAIL_FROM'];
 				if(!mb_send_mail($to, $subject, $message, $from)){
