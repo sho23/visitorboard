@@ -56,10 +56,12 @@
 								<option value="2">2人</option>
 								<option value="3">3人以上</option>
 							</select>
+							<small class="form-text text-muted">宿泊は原則1人までです</small>
 						</div>
 						<div class="form-group">
 							<label for="date">訪問日</label>
 							<input type="text" class="form-control" name="date" id="datepicker" value="<?php echo date('m/d/Y'); ?>">
+							<small class="form-text text-muted">連泊される場合は各日ごとに個別に申請してください</small>
 						</div>
 						<div class="form-group">
 							<label for="time">訪問時間</label>
@@ -94,10 +96,12 @@
 								<option value="2">2 people</option>
 								<option value="3">3 people or more</option>
 							</select>
+							<small class="form-text text-muted">Only allowed one person for staying.</small>
 						</div>
 						<div class="form-group">
 							<label for="date">Date</label>
 							<input type="text" class="form-control" name="date" id="datepicker2" value="<?php echo date('m/d/Y'); ?>">
+							<small class="form-text text-muted">Enter visitor information for each day even if it's staying more than 1 night.</small>
 						</div>
 						<div class="form-group">
 							<label for="time">Time</label>
